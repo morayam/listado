@@ -5,23 +5,23 @@ function agregarItemAlListado(arreglo){
         
     arreglo.push(item.value);
 
-    localStorage.setItem("datos", JSON.stringify(arreglo));
+    localStorage.setItem("datos", JSON.stringify(arreglo)); //transforma el arreglo en un string para poder guardarlo
 
     item.value = ""
 }
 
 function mostrarListado(array){
 
+    console.log(array)
+
     let content = "";
 
-    for (let i = 0; i < array.length; i++){
-        let elemento = array[i];
-        content +=`
-        <li class="list-group-item">${elemento}</li>
-        `
+    for (let item of array){
+        
+        content +=`<li class="list-group-item">${item}</li>`;
     }
 
-    document.getElementById("contenedor").innerHTML = content
+    document.getElementById("contenedor").innerHTML = content;
 }
 
 function limpiar(){
@@ -33,10 +33,10 @@ function limpiar(){
 
 document.addEventListener("DOMContentLoaded", ()=>{
 
-    arrayItems = JSON.stringify(localStorage.getItem("datos"));
+    let datos = JSON.parse(localStorage.getItem("datos")); //trasnsforma el string a un objeto (arreglo) para poder usarlo
 
-    if (arrayItems != null){
-        mostrarListado(arrayItems);
+    if (datos != null){
+        mostrarListado(datos);
     }else{
         arrayItems = [];
     }
